@@ -57,7 +57,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
     {
         transData->transState = DECLINED_STOLEN_CARD;
     }
-    else if (isValidAccount == LOW_BALANCE)
+    else if (isValidCard == LOW_BALANCE)
     {
         transData->transState = DECLINED_INSUFFECIENT_FUND;
     }

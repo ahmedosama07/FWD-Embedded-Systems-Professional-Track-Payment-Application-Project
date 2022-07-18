@@ -37,7 +37,11 @@ EN_serverError_t isAmountAvailable(ST_terminalData_t* termData);
 EN_serverError_t saveTransaction(ST_transaction_t* transData);
 EN_serverError_t getTransaction(uint32_t transactionSequenceNumber, ST_transaction_t* transData);
 
+void fillDB(ST_transaction_t* transactionDB, uint32_t size);
+
 extern ST_accountsDB_t accountsDB[DBMAXSIZE];
 extern ST_transaction_t transactionsDB[DBMAXSIZE];
+extern uint32_t key;
+extern uint32_t sequence;
 
 #endif // SERVER_H_INCLUDED

@@ -5,23 +5,15 @@
 #include "Card/card.h"
 #include "Terminal/terminal.h"
 #include "Server/server.h"
+#include "Application/app.h"
 
 
 
 int main()
 {
-    ST_cardData_t card;
-    ST_terminalData_t terminal;
-    printf("Hello world!\n");
-    getCardExpiryDate(&card);
-    getTransactionDate(&terminal);
-    printf("\n%d\n", isCardExpired(card, terminal));
+    fillDB(transactionsDB, DBMAXSIZE);
 
-    getTransactionAmount(&terminal);
-    setMaxAmount(&terminal, 1000);
-    printf("\n%d\n", isBelowMaxAmount(&terminal));
+    appStart();
 
-    printf("%f\n\n", accountsDB[1].balance);
-    printf("%f", transactionsDB[100].terminalData.transactionDate);
     return 0;
 }

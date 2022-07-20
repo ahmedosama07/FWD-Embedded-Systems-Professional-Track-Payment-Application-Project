@@ -69,7 +69,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 
     isSaved = saveTransaction(transData);
 
-    if ((isValidCard == ACCOUNT_NOT_FOUND) && (target == 255))
+    if ((isValidCard == ACCOUNT_NOT_FOUND) || (target == 255))
     {
         printf("Stolen Card\n");
 
@@ -88,13 +88,12 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
             return INTERNAL_SERVER_ERROR;
         }
     }
-
-    if (isBelowMaxAmount(&(transData->terminalData)) == OK_t)
+    else if ((isBelowMaxAmount(&(transData->terminalData)) == OK_t) && (isValidCard == OK_c))
     {
+        
         accountsDB[target].balance -= transData->terminalData.transAmount;
         printf("Succeeded\n");
     }
-
     
 
     return APPROVED;
@@ -107,10 +106,27 @@ EN_serverError_t isValidAccount(ST_cardData_t* cardData)
     uint8_t isDateRight;
 
     isValidName = getCardHolderName(cardData);
+    
+    while (isValidName == WRONG_NAME)
+    {
+        isValidName = getCardHolderName(cardData);
+    }
+
     isPANRight = getCardPAN(cardData);
+
+    while (isPANRight == WRONG_PAN)
+    {
+        isPANRight = getCardPAN(cardData);
+    }
+
     isDateRight = getCardExpiryDate(cardData);
 
-    if ((isValidName == OK_c) || (isPANRight == OK_c) || (isDateRight == OK_c))
+    while (isDateRight == WRONG_EXP_DATE)
+    {
+        isDateRight = getCardExpiryDate(cardData);
+    }
+
+    if ((isValidName == OK_c) && (isPANRight == OK_c) && (isDateRight == OK_c))
     {
         uint32_t i = 0;
         for (i = 0; i < DBMAXSIZE; i++)
@@ -122,11 +138,8 @@ EN_serverError_t isValidAccount(ST_cardData_t* cardData)
             }
         }
         target = 255;
-        
-        return ACCOUNT_NOT_FOUND;
     }
-
-    return WRONG_NAME;
+    return ACCOUNT_NOT_FOUND;
 }
 
 EN_serverError_t isAmountAvailable(ST_terminalData_t* termData)

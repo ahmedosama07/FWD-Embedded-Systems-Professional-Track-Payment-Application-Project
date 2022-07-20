@@ -5,6 +5,16 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Payment Application", "Payment Application\Payment Application.vcxproj", "{8E04339C-C4A2-4926-9546-DBDAB3119D54}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2072331-0762-423A-AB82-24DABC3CE235}"
+	ProjectSection(SolutionItems) = preProject
+		Screenshots\app_header.PNG = Screenshots\app_header.PNG
+		Screenshots\card_header.PNG = Screenshots\card_header.PNG
+		Screenshots\server_header.PNG = Screenshots\server_header.PNG
+		Screenshots\Solution Explorer.PNG = Screenshots\Solution Explorer.PNG
+		Screenshots\terminal_header.PNG = Screenshots\terminal_header.PNG
+		video1986567454.mp4 = video1986567454.mp4
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

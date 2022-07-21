@@ -31,6 +31,7 @@ EN_terminalError_t isCardExpired(ST_cardData_t cardData, ST_terminalData_t termD
 	uint32_t expirationDate = 100 * atoi(expirationDateYears) + atoi(expirationDateMonths);
     uint32_t terminalDate = 100 * atoi(terminalDateYears) + atoi(terminalDateMonths);
 
+	
 	if (expirationDate < terminalDate)
 	{
 		return EXPIRED_CARD;

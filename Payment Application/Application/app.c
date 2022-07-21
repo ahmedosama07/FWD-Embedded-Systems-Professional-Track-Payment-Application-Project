@@ -13,6 +13,7 @@ void appStart(void)
 	ST_transaction_t transaction;
 	ST_transaction_t* transactionptr = &transaction;
 
+	setMaxAmount(&(transactionptr->terminalData), 5000);
 	
 
 	uint8_t another;
@@ -23,7 +24,7 @@ void appStart(void)
 	do
 	{
 		getTransactionDate(&(transactionptr->terminalData));
-		setMaxAmount(&(transactionptr->terminalData), 6000);
+		
 		recieveTransactionData(transactionptr);
 		uint32_t i = 0;
 		for (i = 0; i < DBMAXSIZE; i++)

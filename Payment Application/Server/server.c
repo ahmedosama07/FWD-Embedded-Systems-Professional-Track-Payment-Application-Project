@@ -69,6 +69,8 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 
     isSaved = saveTransaction(transData);
 
+    
+
     if ((isValidCard == ACCOUNT_NOT_FOUND) || (target == 255))
     {
         printf("Stolen Card\n");
@@ -87,13 +89,14 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
             printf("Internal Server Error\n");
             return INTERNAL_SERVER_ERROR;
         }
+        else if ((isBelowMaxAmount(&(transData->terminalData)) == OK_t) && (isValidCard == OK_c))
+        {
+
+            accountsDB[target].balance -= transData->terminalData.transAmount;
+            printf("Succeeded\n");
+        }
     }
-    else if ((isBelowMaxAmount(&(transData->terminalData)) == OK_t) && (isValidCard == OK_c))
-    {
-        
-        accountsDB[target].balance -= transData->terminalData.transAmount;
-        printf("Succeeded\n");
-    }
+    
     
 
     return APPROVED;

@@ -57,7 +57,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
     {
         transData->transState = DECLINED_STOLEN_CARD;
     }
-    else if (isValidCard == LOW_BALANCE)
+    else if (isValidAmount == LOW_BALANCE)
     {
         transData->transState = DECLINED_INSUFFECIENT_FUND;
     }
@@ -207,6 +207,7 @@ EN_serverError_t getTransaction(uint32_t transactionSequenceNumber, ST_transacti
 
             return OK;
         }
+        i++;
     }
     puts("Transaction Not Found");
     return TRANSACTION_NOT_FOUND;

@@ -41,7 +41,7 @@ void fillDB(ST_transaction_t* transactionDB, uint32_t size);
 
 extern ST_accountsDB_t accountsDB[DBMAXSIZE];
 extern ST_transaction_t transactionsDB[DBMAXSIZE];
-extern uint32_t key;
 extern uint32_t sequence;
+uint32_t key;
 
 #endif // SERVER_H_INCLUDED
